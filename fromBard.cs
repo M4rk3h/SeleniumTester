@@ -1,10 +1,9 @@
-﻿using AngleSharp.Dom;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using System;
+using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager;
 
 namespace SeleniumTester
 {
@@ -16,7 +15,8 @@ namespace SeleniumTester
         public void Setup()
         {
             // Replace with your desired path to ChromeDriver
-            driver = new ChromeDriver(@"C:\Users\markb\source\repos\SeleniumTester\bin\Debug\net8.0\Chrome\121.0.6167.85\X64\chromedriver.exe");
+            new DriverManager().SetUpDriver(new ChromeConfig());
+            driver = new ChromeDriver();
         }
 
         [Test]
@@ -26,7 +26,6 @@ namespace SeleniumTester
             driver.Navigate().GoToUrl("https://www.google.co.uk/");
             // Maximise window
             driver.Manage().Window.Maximize();
-            
             DemoHelper.Pause();
 
             // Cookie Popup - Click Accept
@@ -35,7 +34,7 @@ namespace SeleniumTester
 
             // Find the element for gmail
             IWebElement aboutElement = driver.FindElement(By.XPath("/html/body/div[1]/div[1]/a[1]"));
-            
+
             // Assert that the element is not null and contains the text "Google"
             Assert.NotNull(aboutElement);
             Assert.IsTrue(aboutElement.Text.Contains("About"));
