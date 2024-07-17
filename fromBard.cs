@@ -16,7 +16,7 @@ namespace SeleniumTester
         public void Setup()
         {
             // Replace with your desired path to ChromeDriver
-            driver = new ChromeDriver(@"C:\Users\markb\source\repos\SeleniumTester\bin\Debug\net8.0\Chrome\121.0.6167.85\X64\chromedriver.exe");
+            driver = new ChromeDriver();
         }
 
         [Test]
